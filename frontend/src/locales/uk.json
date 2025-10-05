@@ -1,0 +1,14 @@
+{
+  "SignIn": {
+    "title": "Увійти",
+    "submit": "Вхід"
+  },
+  "SignUp": {
+    "title": "Реєстрація",
+    "submit": "Зареєструватися"
+  },
+  "FinMind": {
+    "title": "FinMind | Dashboard",
+    "submit": "Register"
+  }
+}

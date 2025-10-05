@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer clerk;
+
+
+:root {
+  --background: #F5F7FA;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  --font-mono: "Roboto Mono", "Courier New", monospace;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+}
+
+.cl-card,
+.cl-main,
+.cl-form,
+.cl-formField,
+.cl-formField__label,
+.cl-formField__input,
+.cl-formButton,
+.cl-formButtonPrimary,
+.cl-formButtonSecondary,
+.cl-socialButtons,
+.cl-socialButton,
+.cl-divider,
+.cl-dividerLine,
+.cl-dividerText,
+.cl-header,
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-footer,
+.cl-footerAction,
+.cl-footerText {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+}

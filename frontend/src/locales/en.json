@@ -1,0 +1,13 @@
+{
+  "SignIn": {
+    "title": "FinMind | Sign In",
+    "submit": "Login"
+  },
+  "SignUp": {
+    "title": "FinMind | Sign Up",
+    "submit": "Register"
+  },
+  "FinMind": {
+    "title": "FinMind | Dashboard"
+  }
+}
