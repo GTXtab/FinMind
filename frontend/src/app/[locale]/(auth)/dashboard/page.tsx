@@ -1,6 +1,6 @@
-import Card from '@/components/card';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import OverView from './overview/page';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -23,8 +23,8 @@ export default async function Dashboard(props: {
   setRequestLocale(locale);
 
   return (
-    <div className="py-5 [&_p]:my-6">
-      <Card />
-    </div>
+    <>
+      <OverView />
+    </>
   );
 }
