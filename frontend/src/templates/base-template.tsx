@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { NavBar } from "@/components/nav-bar";
 import { BurgerIcon } from "@/ui/burger-menu";
 import { XMarkIcon } from "@/ui/xmark-icon";
@@ -7,11 +7,20 @@ import { SearchInput } from "@/ui/search-input";
 import { UserAvatar } from "@clerk/nextjs";
 import { BellIcon } from "@/ui/bell-icon";
 import { Cog6ToothIcon } from "@/ui/tooth-icon";
+import { usePathname } from "next/navigation";
 
 export const BaseTemplate = (props: { children: React.ReactNode }) => {
-  const [activeSection, setActiveSection] = useState("Overview");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  const pathname = usePathname();
+
+  const title = useMemo(() => {
+    if (pathname.includes("/dashboard/transactions")) return "Transactions";
+    if (pathname.includes("/dashboard/accounts")) return "Accounts";
+    if (pathname.includes("/dashboard/settings")) return "Settings";
+    return "Overview";
+  }, [pathname]);
 
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
@@ -21,7 +30,7 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex bg-gray-50 text-gray-700 antialiased">
+    <div className="w-full min-h-screen flex text-gray-700 antialiased">
       {(menuOpen || isDesktop) && (
         <aside
           className={`fixed lg:static top-[72px] lg:top-0 left-0 w-64 bg-white border-r border-gray-200 shadow-md lg:shadow-none lg:h-screen transition-transform duration-300 z-40`}
@@ -32,8 +41,7 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
             </h1>
           )}
           <NavBar
-            onSelect={(label: string) => {
-              setActiveSection(label);
+            onSelect={() => {
               if (!isDesktop) setMenuOpen(false);
             }}
           />
@@ -57,9 +65,7 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
               </button>
             )}
 
-            <h1 className="text-2xl font-semibold text-[#273469]">
-              {activeSection}
-            </h1>
+            <h1 className="text-2xl font-semibold text-[#273469]">{title}</h1>
 
             {isDesktop ? (
               <div className="flex items-center gap-4">
@@ -74,7 +80,7 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
                   className="relative p-2 rounded-full hover:bg-gray-100 transition"
                 >
                   <BellIcon />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
                 </button>
                 <UserAvatar />
               </div>
@@ -98,7 +104,7 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
           )}
         </header>
 
-        <main className="flex-1 p-4">{props.children}</main>
+        <main className="flex-1 p-6">{props.children}</main>
       </div>
     </div>
   );
