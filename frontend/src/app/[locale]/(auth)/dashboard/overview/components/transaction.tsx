@@ -29,18 +29,18 @@ export const Transaction: React.FC<TransactionProps> = ({
     Math.abs(amount).toLocaleString();
 
   return (
-    <div className="flex items-center justify-between py-3 border-b border-gray-100">
+    <div className="flex items-center justify-between min-[1024px]:py-1 py-3 border-b border-gray-100">
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-50">
           <Icon />
         </div>
         <div>
-          <p className="font-medium text-gray-900">{title}</p>
-          <p className="text-sm text-gray-400">{date}</p>
+          <p className="font-medium min-[1024px]:text-[13px] text-gray-900">{title}</p>
+          <p className="min-[1024px]:text-[12px] text-sm text-gray-400">{date}</p>
         </div>
       </div>
       <p
-        className={`font-semibold ${
+        className={`font-semibold min-[1024px]:text-[11px] ${
           type === "expense" ? "text-red-500" : "text-green-500"
         }`}
       >

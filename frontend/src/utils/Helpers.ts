@@ -30,3 +30,20 @@ export const getI18nPath = (url: string, locale: string) => {
 export const isServer = () => {
   return typeof window === 'undefined';
 };
+
+
+export function formatBalanceSelective(balance: number): string | number {
+  if (balance >= 1000000000 && balance % 1000000000 === 0) {
+    return (balance / 1000000000) + 'b';
+  }
+
+  if (balance >= 1000000 && balance % 1000000 === 0) {
+    return (balance / 1000000) + 'm';
+  }
+
+  if (balance >= 1000 && balance % 1000 === 0) {
+    return (balance / 1000) + 'k';
+  }
+
+  return balance.toLocaleString('en-US');
+}

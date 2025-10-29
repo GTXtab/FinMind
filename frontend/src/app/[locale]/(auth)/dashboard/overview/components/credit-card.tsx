@@ -1,8 +1,9 @@
 "use client";
 import { CardChipIcon } from "@/ui/chip-icon";
+import { formatBalanceSelective } from "@/utils/Helpers";
 import React, { useState } from "react";
 
-interface CreditCardProps {
+export interface CreditCardProps {
   balance: number;
   holder: string;
   validThru: string;
@@ -30,7 +31,6 @@ export const CreditCard: React.FC<CreditCardProps> = ({
 
   const handleClickGroup = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-
     const anyHidden = revealed.some((r) => !r);
 
     setRevealed(new Array(number.length).fill(anyHidden));
@@ -39,18 +39,17 @@ export const CreditCard: React.FC<CreditCardProps> = ({
   return (
     <div
       onClick={() => setFlipped(!flipped)}
-      className={`relative w-[280px] h-[170px] rounded-xl text-white cursor-pointer transition-transform duration-500 [transform-style:preserve-3d] ${
+      className={`relative w-[280px] min-[1024px]:w-[230px] h-[170px] rounded-xl text-white cursor-pointer transition-transform duration-500 [transform-style:preserve-3d] ${
         flipped ? "[transform:rotateY(180deg)]" : ""
       }`}
     >
-      {/* Front */}
       <div
         className={`absolute inset-0 rounded-xl bg-gradient-to-tr ${color} p-5 flex flex-col justify-between backface-hidden`}
       >
         <div className="flex justify-between items-start">
           <div>
             <p className="text-sm opacity-80">Balance</p>
-            <h2 className="text-2xl font-bold">${balance.toLocaleString()}</h2>
+            <h2 className="text-2xl font-bold">$ {formatBalanceSelective(balance)}</h2>
           </div>
           <CardChipIcon size={40} color="#fff" />
         </div>
@@ -64,7 +63,7 @@ export const CreditCard: React.FC<CreditCardProps> = ({
             <span>{holder}</span>
             <span>{validThru}</span>
           </div>
-          <p className="text-lg mt-2 tracking-widest cursor-pointer">
+          <p className="text-[16px] mt-2 tracking-widest cursor-pointer">
             {number.match(/.{1,4}/g)?.map((group, idx) => (
               <span key={idx} onClick={(e) => handleClickGroup(e)}>
                 {revealed[idx] ? group : "****"}
@@ -74,7 +73,6 @@ export const CreditCard: React.FC<CreditCardProps> = ({
         </div>
       </div>
 
-      {/* Back */}
       <div
         className="absolute inset-0 rounded-2xl p-6 text-white shadow-lg flex flex-col justify-between backface-hidden [transform:rotateY(180deg)]"
         style={{

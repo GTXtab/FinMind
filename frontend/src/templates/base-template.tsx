@@ -12,7 +12,6 @@ import { usePathname } from "next/navigation";
 export const BaseTemplate = (props: { children: React.ReactNode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-
   const pathname = usePathname();
 
   const title = useMemo(() => {
@@ -30,27 +29,35 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex text-gray-700 antialiased">
-      {(menuOpen || isDesktop) && (
-        <aside
-          className={`fixed lg:static top-[72px] lg:top-0 left-0 w-64 bg-white border-r border-gray-200 shadow-md lg:shadow-none lg:h-screen transition-transform duration-300 z-40`}
-        >
-          {isDesktop && (
-            <h1 className="text-4xl mt-3 ml-6 font-extrabold tracking-tight text-[#273469] select-none">
-              Fin<span className="text-blue-600">Mind</span>
-            </h1>
-          )}
-          <NavBar
-            onSelect={() => {
-              if (!isDesktop) setMenuOpen(false);
-            }}
-          />
-        </aside>
-      )}
+    <div className="min-h-screen flex text-gray-700">
+      <aside
+        className={`bg-white border-r border-gray-200 z-40 transition-transform duration-300
+          ${
+            isDesktop
+              ? "w-[190px] static shadow-none"
+              : "fixed top-0 left-0 w-64 h-full shadow-md"
+          }
+          ${!menuOpen && !isDesktop ? "-translate-x-full" : "translate-x-0"}
+        `}
+      >
+        {isDesktop && (
+          <h1 className="text-4xl mt-3 ml-6 font-extrabold tracking-tight text-[#273469] select-none">
+            Fin<span className="text-blue-600">Mind</span>
+          </h1>
+        )}
+        <NavBar
+          onSelect={() => {
+            if (!isDesktop) setMenuOpen(false);
+          }}
+        />
+      </aside>
 
-      <div className="flex-1 flex flex-col">
+      <div
+        className="w-100vw flex-1 flex flex-col"
+        style={{ width: isDesktop ? "calc(100vw - 16rem)" : "100vw" }}
+      >
         <header className="bg-white border-b border-gray-200 px-4 py-3 flex flex-col gap-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             {!isDesktop && (
               <button
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -67,8 +74,13 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
 
             <h1 className="text-2xl font-semibold text-[#273469]">{title}</h1>
 
+
+
             {isDesktop ? (
               <div className="flex items-center gap-4">
+                <div className="w-full items-center">
+                  <SearchInput />
+                </div>
                 <button
                   aria-label="Settings"
                   className="p-2 rounded-full hover:bg-gray-100 transition"
@@ -89,22 +101,12 @@ export const BaseTemplate = (props: { children: React.ReactNode }) => {
             )}
           </div>
 
-          {!isDesktop && (
-            <div className="w-full">
-              <SearchInput />
-            </div>
-          )}
-
-          {isDesktop && (
-            <div className="flex">
-              <div className="max-w-md w-full">
-                <SearchInput />
-              </div>
-            </div>
-          )}
+          <div className="w-full lg:hidden">
+            <SearchInput />
+          </div>
         </header>
 
-        <main className="flex-1 p-6">{props.children}</main>
+        <main className="flex-1 bg-gray-50">{props.children}</main>
       </div>
     </div>
   );

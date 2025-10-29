@@ -60,3 +60,13 @@ body {
 .backface-hidden {
   backface-visibility: hidden;
 }
+
+.swiper-slide {
+  width: 280px !important;
+}
+
+@media (min-width: 1024px) {
+  .swiper-slide {
+    width: 230px !important;
+  }
+}
