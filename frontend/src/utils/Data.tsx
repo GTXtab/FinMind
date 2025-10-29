@@ -1,3 +1,4 @@
+import { CreditCardProps } from "@/app/[locale]/(auth)/dashboard/overview/components/credit-card";
 import { TransactionProps } from "@/types/transaction";
 
 export const transactions: TransactionProps[] = [
@@ -25,7 +26,75 @@ export const transactions: TransactionProps[] = [
     type: "income",
     icon: "dollar",
   },
+    {
+    id: "4",
+    title: "Deposit from my",
+    date: "28 January 2021",
+    amount: 850,
+    type: "expense",
+    icon: "wallet",
+  },
+  {
+    id: "5",
+    title: "Deposit Paypal",
+    date: "25 January 2021",
+    amount: 2500,
+    type: "income",
+    icon: "paypal",
+  },
+  {
+    id: "6",
+    title: "Jemi Wilson",
+    date: "21 January 2021",
+    amount: 5400,
+    type: "income",
+    icon: "dollar",
+  },
+    {
+    id: "7",
+    title: "Deposit from my",
+    date: "28 January 2021",
+    amount: 850,
+    type: "expense",
+    icon: "wallet",
+  },
+  {
+    id: "8",
+    title: "Deposit Paypal",
+    date: "25 January 2021",
+    amount: 2500,
+    type: "income",
+    icon: "paypal",
+  },
+  {
+    id: "9",
+    title: "Jemi Wilson",
+    date: "21 January 2021",
+    amount: 5400,
+    type: "income",
+    icon: "dollar",
+  },
 ];
+
+export const cards: CreditCardProps[] = [
+  {
+    balance: 1000,
+    holder: "Eddy Cusuma",
+    validThru: "12/26",
+    number: "3778 4211 6578 1234",
+    color: "from-indigo-500 to-blue-500",
+    cvv: "123",
+  },
+  {
+    balance: 3120,
+    holder: "Nazar Malakhovskyi",
+    validThru: "08/25",
+    number: "5523 7651 6434 8844",
+    color: "from-purple-500 to-pink-500",
+    cvv: "456",
+  },
+];
+
 
 export const WeeklyActivityData = [
   { name: "Sat", deposit: 220, withdraw: 480 },

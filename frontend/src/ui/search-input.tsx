@@ -10,7 +10,7 @@ interface BurgerIconProps {
 
 export const SearchInput: React.FC<BurgerIconProps> = ({}) => {
   return (
-    <div className="relative max-w-screen-md mx-auto mt-4">
+    <div className="relative max-w-screen-md mx-auto lg:mt-0">
       <input
         type="text"
         placeholder="Search for something"
